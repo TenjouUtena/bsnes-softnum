@@ -1,1 +1,5 @@
 hiro/qt/qt.moc
+bsnes/out
+bsnes/target
+bsnes/src
+Cargo.lock

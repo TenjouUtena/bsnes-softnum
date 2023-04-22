@@ -148,6 +148,17 @@ auto InputMapping::poll() -> int16 {
       if(device->isJoypad() && group == HID::Joypad::GroupID::Hat) result += value < 0 ? -1 : value > 0 ? +1 : 0;
     }
   }
+  //check the reset input binding.
+
+  for (auto hs : inputManager.hotkeys) {
+    if(!hs.bindings[0].device)
+      continue;
+    auto value = hs.bindings[0].device->group(hs.bindings[0].group).input(hs.bindings[0].input).value();
+    if(hs.name == "Reset Emulation" && value)
+      program.reset();
+  }
+
+
 
   if(isDigital() && logic() == Logic::AND && validBindings > 0) return 1;
   return result;
