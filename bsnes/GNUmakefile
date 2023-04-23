@@ -46,6 +46,9 @@ endif
 
 objects := libco emulator filter lzma
 
+#flags += $(shell python3-config --cflags)
+flags += -I/opt/homebrew/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/include/python3.11 -I/opt/homebrew/opt/python@3.11/Frameworks/Python.framework/Versions/3.11/include/python3.11 -fno-common -dynamic -DNDEBUG -g -fwrapv -O3 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.sdk
+
 obj/libco.o: ../libco/libco.c
 obj/emulator.o: emulator/emulator.cpp
 obj/filter.o: filter/filter.cpp

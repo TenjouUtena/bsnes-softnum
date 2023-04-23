@@ -1,9 +1,12 @@
 #include "bsnes.hpp"
 #include <sfc/interface/interface.hpp>
+#include "python/python.hpp"
 Video video;
 Audio audio;
 Input input;
 unique_pointer<Emulator::Interface> emulator;
+BsnesPython* python;
+
 
 auto locate(string name) -> string {
   string location = {Path::program(), name};
@@ -16,8 +19,17 @@ auto locate(string name) -> string {
   return {Path::userSettings(), "bsnes/", name};
 }
 
+
+auto frame_python() {
+  if(python)
+   python->run();
+}
+
 #include <nall/main.hpp>
 auto nall::main(Arguments arguments) -> void {
+  python = new BsnesPython();
+  python->init();
+  python->load_script("test2");
   settings.location = locate("settings.bml");
 
   for(auto argument : arguments) {
@@ -49,6 +61,7 @@ auto nall::main(Arguments arguments) -> void {
   Instances::stateWindow.construct();
   Instances::toolsWindow.construct();
   emulator = new SuperFamicom::Interface;
+  emulator.pointer->add_hook(frame_python);
   program.create();
 
   Application::run();

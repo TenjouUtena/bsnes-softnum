@@ -8,7 +8,7 @@ ruby.path := ../ruby
 include $(ruby.path)/GNUmakefile
 
 objects += ui-bsnes ui-program ui-input ui-presentation
-objects += ui-settings ui-tools ui-resource
+objects += ui-settings ui-tools ui-resource ui-python
 objects := $(objects:%=obj/%.o)
 
 obj/ui-bsnes.o: $(ui)/bsnes.cpp
@@ -18,6 +18,11 @@ obj/ui-presentation.o: $(ui)/presentation/presentation.cpp
 obj/ui-settings.o: $(ui)/settings/settings.cpp
 obj/ui-tools.o: $(ui)/tools/tools.cpp
 obj/ui-resource.o: $(ui)/resource/resource.cpp
+obj/ui-python.o: $(ui)/python/python.cpp
+
+
+options += $(shell python3-config --ldflags)
+options += -lpython3.11
 
 all: $(hiro.objects) $(ruby.objects) $(objects)
 	$(info Linking out/$(name) ...)

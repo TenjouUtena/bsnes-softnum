@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 namespace Emulator {
 
 struct Interface {
@@ -50,6 +51,8 @@ struct Interface {
     string name;
   };
 
+  std::vector<void (*)()> frame_hooks;
+
   //information
   virtual auto information() -> Information { return {}; }
 
@@ -74,6 +77,7 @@ struct Interface {
   virtual auto connect(uint port, uint device) -> void {}
   virtual auto power() -> void {}
   virtual auto reset() -> void {}
+  virtual auto add_hook(void (*)() ) -> void {}
   virtual auto run() -> void {}
 
   //time functions

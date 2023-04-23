@@ -44,6 +44,7 @@ struct Interface : Emulator::Interface {
   auto load() -> bool override;
   auto save() -> void override;
   auto unload() -> void override;
+  auto add_hook(void (*)() ) -> void override;
 
   auto ports() -> vector<Port> override;
   auto devices(uint port) -> vector<Device> override;

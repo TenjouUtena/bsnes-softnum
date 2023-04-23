@@ -14,6 +14,10 @@ auto Interface::information() -> Information {
   return information;
 }
 
+auto Interface::add_hook(void (*func)() ) -> void {
+  frame_hooks.push_back(func); 
+}
+
 auto Interface::display() -> Display {
   Display display;
   display.type   = Display::Type::CRT;

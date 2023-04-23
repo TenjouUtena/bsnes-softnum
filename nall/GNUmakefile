@@ -159,6 +159,8 @@ ifeq ($(object.path),)
   object.path := obj
 endif
 
+options += $(shell python3-config --ldflags)
+
 # rules
 default: all;
 

@@ -3,3 +3,7 @@ bsnes/out
 bsnes/target
 bsnes/src
 Cargo.lock
+__pycache__
+src/
+target/
+.cache/

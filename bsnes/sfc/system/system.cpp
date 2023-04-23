@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <sfc/sfc.hpp>
 
 namespace SuperFamicom {
@@ -105,6 +106,11 @@ auto System::frameEvent() -> void {
     }
   }
   Memory::GlobalWriteEnable = false;
+
+  for(auto f = interface->frame_hooks.begin(); f < interface->frame_hooks.end(); f++) {
+    (*f)();
+  }
+
 }
 
 auto System::load(Emulator::Interface* interface) -> bool {
